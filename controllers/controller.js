@@ -11,12 +11,12 @@ const getDel = asyncHandler(async (req, res) => {
 const setDel = asyncHandler(async (req, res) => {
   console.log("setDel req.body=====>", req.body);
 
-  if (!req.body.text) {
+  if (!req.body) {
     res.status(400);
     throw new Error("Please Add Details");
   }
 
-  const del = await Del.create({ text: req.body.text, user: req.user.id });
+  const del = await Del.create({ ...req.body, user: req.user.id });
 
   res.json(del);
 });
